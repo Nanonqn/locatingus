@@ -11,6 +11,15 @@ use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\web\IdentityInterface;
 use yii\helpers\Security;
+use yii\helpers\ArrayHelper;
+//agregamos la sentencia use para rol
+use backend\models\Rol;
+
+//agregamos la sentencia use para estadoUsuario
+use backend\models\EstadoUsuario;
+
+
+
 /**
  * User model
  *
@@ -210,4 +219,59 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    /**
+     * Relacion getRol
+     */
+    public function getRol()
+    {
+        return $this->hasOne(Rol::className(),['id'=>'rol_id']);
+    }
+
+    /**
+     * Relacion get nombre
+     */
+    public function getRolNombre()
+    {
+        return $this->rol ? $this->rol->rol : '-sin rol-';
+    }
+
+    /**
+     * obtener lista de roles
+     */
+    public function getRolLista()
+    {
+        $opciones = Rol::find()->asArray()->all();
+        return ArrayHelper::map($opciones,'id','rol');
+    }
+
+    /**
+     * relacion get estado
+     */
+    public function getEstadoUsuario()
+    {
+        return $this->hasOne(EstadoUsuario::className(),['id'=>'estado_usuario_id']);
+    }
+
+    /**
+     * get estado nombre
+     */
+    public function getEstadoNombre()
+    {
+        return $this->estado ? $this->estado->estado_nombre : '- sin estado -';
+    }
+
+    /**
+     * obtener lista de estados
+     */
+    public static function getEstadoLista()
+    {
+        $opciones = Estado::find()->asArray()->all();
+        return ArrayHelper::map($opciones, 'id', 'estado_nombre');
+    }
+
+    
+
+
+
 } 
