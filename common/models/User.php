@@ -12,12 +12,14 @@ use yii\db\Expression;
 use yii\web\IdentityInterface;
 use yii\helpers\Security;
 use yii\helpers\ArrayHelper;
-//agregamos la sentencia use para rol
+//agregamos sentencia use para rol
 use backend\models\Rol;
 
-//agregamos la sentencia use para estadoUsuario
+//agregamos sentencia use para estadoUsuario
 use backend\models\EstadoUsuario;
 
+//agregamos sentencia use para tipoUsuario
+use backend\models\TipoUsuario;
 
 
 /**
@@ -270,6 +272,14 @@ class User extends ActiveRecord implements IdentityInterface
         return ArrayHelper::map($opciones, 'id', 'estado_nombre');
     }
 
+    /**
+     * obtener tipo de usuario
+     */
+
+     public function getTipoUsuario()
+     {
+         return $this->hasOne(TipoUsuairo::className(),['id'=>'tipo_usuario_id']);
+     }
     
 
 
