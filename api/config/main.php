@@ -15,8 +15,8 @@ return [
         'request' => [
             'csrfParam' => '_csrf-api',
             'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
-              ],
+                'application/json' => 'yii\web\JsonParser'
+            ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -24,7 +24,7 @@ return [
             'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
         ],
         'session' => [
-            // this is the name of the session cookie used for login on the frontend
+            // this is the name of the session cookie used for login on the api
             'name' => 'advanced-api',
         ],
         'log' => [
@@ -42,10 +42,12 @@ return [
         
         'urlManager' => [
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'city'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'country'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'city'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
             ],
         ],
         
