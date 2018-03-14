@@ -45,6 +45,10 @@ return [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:\w+\-\w+>/<id:\d+>' => '<controller>/view',
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'country'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'city'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
